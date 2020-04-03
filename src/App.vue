@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <layout/>
+    <gridLayout/>
+    <layout style="display: none"/>
   </div>
 </template>
 
 <script>
-import layout from './view/layout/layout.vue'
+import layout from './view/layout/layout'
+import gridLayout from './view/layout/grid_layout'
 
 export default {
   name: 'app',
   components: {
-    layout
+    layout,
+    gridLayout
   }
 }
 </script>
