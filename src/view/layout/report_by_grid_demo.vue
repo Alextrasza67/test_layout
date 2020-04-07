@@ -1,19 +1,23 @@
 <template>
   <div class="screen">
 
-    <div class="grid_container" style="position: fixed">
+    <div class="grid_container fixed">
       <div v-for="i in 100" class="item" v-bind:key="i">
         <span>{{i}}</span>
       </div>
     </div>
 
     <div class="grid_container">
-
       <div v-for="(item, i) in layout" :class="`item transparent color-${i%6}`" v-bind:key="i"
            :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
         <span class="bold">{{i}}</span>
       </div>
+    </div>
 
+    <div class="fixed line_container">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
     </div>
   </div>
 </template>
@@ -53,6 +57,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .fixed{
+    position: fixed
+  }
+
   .screen{
     top: 0px;
     bottom: 0px;
@@ -114,6 +122,39 @@
       .color-5{
         background-color: #ffffff;
       }
+    }
+
+    .line_container{
+      width: 100%;
+      height: 100%;
+      top: 0px;
+
+      .line1{
+        width: 100%;
+        height: 4px;
+        background-color: #000;
+        position: relative;
+        top: calc(100% * 0.2);
+      }
+
+      .line2{
+        position: absolute;
+        background-color: #000;
+        top: calc(100% * 0.4);
+        left: 0px;
+        right: 0px;
+        bottom: calc(100% * 0.6 - 4px);
+      }
+
+      .line3{
+        position: absolute;
+        background-color: #000;
+        top: calc(100% * 0.6 + 6px);
+        left: calc(100% * 0.2);
+        right: calc(100% * 0.8 - 4px);
+        bottom: 0px;
+      }
+
     }
   }
 </style>
