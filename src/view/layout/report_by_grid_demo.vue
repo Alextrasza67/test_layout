@@ -73,9 +73,9 @@
       display: grid;
       width: 100%;
       height: 100%;
-      grid-template-columns: repeat(10, 10%);
-      grid-template-rows: repeat(10, 10%);
-      grid-gap: 1px 1px;
+      grid-template-columns: repeat(10, calc(10% - 1px));
+      grid-template-rows: repeat(10, calc(10% - 1px));
+      grid-gap: 1px;
 
       .item{
         text-align: center;
@@ -134,24 +134,24 @@
         height: 4px;
         background-color: #000;
         position: relative;
-        top: calc(100% * 0.2);
+        top: calc(100% * 0.2 - 2px);
       }
 
       .line2{
         position: absolute;
         background-color: #000;
-        top: calc(100% * 0.4);
+        top: calc(100% * 0.4 - 2px);
         left: 0px;
         right: 0px;
-        bottom: calc(100% * 0.6 - 4px);
+        bottom: calc(100% * 0.6 - 2px);
       }
 
       .line3{
         position: absolute;
         background-color: #000;
-        top: calc(100% * 0.6 + 6px);
-        left: calc(100% * 0.2);
-        right: calc(100% * 0.8 - 4px);
+        top: calc(100% * 0.6);
+        left: calc(100% * 0.2 - 2px);
+        right: calc(100% * 0.8 - 2px);
         bottom: 0px;
       }
 
