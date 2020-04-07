@@ -1,25 +1,13 @@
 <template>
   <div id="app">
-    <component :is="component_is"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import layout from './view/layout/layout'
-import gridLayout from './view/layout/grid_layout'
-import reportByGridDemo from './view/layout/report_by_grid_demo'
-
 export default {
   name: 'app',
-  components: {
-    layout,
-    gridLayout,
-    reportByGridDemo
-  },
-  data(){
-    return {
-      "component_is":"reportByGridDemo"
-    }
+  comments:{
   }
 }
 </script>
