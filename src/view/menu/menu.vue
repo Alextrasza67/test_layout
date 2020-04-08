@@ -9,22 +9,24 @@
 </template>
 
 <script>
-import {routes} from '../../router/index'
+import {routes} from '@/router/index'
 export default {
     data() {
         return {
-            routes: routes,
+            routes: [],
         }
     },
     comments:{
     },
     created() {
-        console.log(routes)
+        this.bindRouters()
     },
     mounted() {
     },
     methods: {
-
+        bindRouters(){
+            this.routes = routes.slice(1,routes.length)
+        }
     }
 }
 </script>

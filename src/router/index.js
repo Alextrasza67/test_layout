@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import menu from '../view/menu/menu'
-import layout from '../view/layout/layout'
-import gridLayout from '../view/layout/grid_layout'
-import reportByGridDemo from '../view/layout/report_by_grid_demo'
+import menu from '@/view/menu/menu'
+import layout from '@/view/test/layout'
+import gridLayout from '@/view/test/grid_layout'
+import reportByGridDemo from '@/view/test/report_by_grid_demo'
 
 Vue.use(VueRouter)
 
