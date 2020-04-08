@@ -46,6 +46,7 @@
     created() {
       this.layout = layoutData
       registerMap()
+      this.bindRefreshData()
     },
     mounted() {
       this.refreshWindowsResize();
@@ -59,6 +60,13 @@
       },
       resizeEcharts() {
         this.echartsArray.forEach(item => item.resize())
+      },
+      bindRefreshData(){
+        var _this = this
+        setInterval(function () {
+          _this.layout[4].config.options.series[0].data[0].value = (Math.random() * 100).toFixed(0) - 0;
+          _this.echartsArray[3].setOption(_this.layout[4].config.options, true);
+        },2000);
       }
     }
   }
