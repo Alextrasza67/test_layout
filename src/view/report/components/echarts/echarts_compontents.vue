@@ -23,7 +23,7 @@
     methods: {
       initECharts() {
         var myChart = this.$echarts.init(document.getElementById('echarts_' + this.config.id));
-        myChart.setOption(this.config.options);
+        myChart.setOption(this.config.options,true);
         this.$emit("registeEcharts", myChart)
       }
     }
@@ -33,9 +33,9 @@
 <style lang="scss" scoped>
   .echarts-container {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #bbbbbb;
+    width: 98%;
+    height: 98%;
+    margin: auto;
 
     .w100 {
       width: 100%;

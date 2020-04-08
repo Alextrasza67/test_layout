@@ -4,20 +4,26 @@
     <div class="grid_container"
          :style="`grid-template-columns: repeat(${layoutConfig.cols},${100/layoutConfig.cols}%);
                 grid-template-rows: repeat(${layoutConfig.rows},${100/layoutConfig.rows}%);`">
-      <div v-for="(item, i) in layout" class="grid_item" v-bind:key="i"
-           :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
-        <echartsCompontents :config="item.config" v-if="item.type == 'echarts'"
-                            v-on:registeEcharts="registeEcharts"></echartsCompontents>
-        <textCompontents :config="item.config" v-if="item.type == 'text'"></textCompontents>
-      </div>
+      <template v-for="(item, i) in layout">
+        <div class="grid_item" v-bind:key="i"
+             v-if="item.type == 'echarts' || item.type == 'text'"
+             :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
+          <echartsCompontents :config="item.config" v-if="item.type == 'echarts'"
+                              v-on:registeEcharts="registeEcharts"></echartsCompontents>
+          <textCompontents :config="item.config" v-if="item.type == 'text'"></textCompontents>
+        </div>
+        <lineCompontents v-bind:key="i" :config="item.config" v-if="item.type == 'line'"></lineCompontents>
+      </template>
     </div>
 
   </div>
 </template>
 
 <script>
+  import { registerMap } from "../../api/registeEchartsMap"
   import echartsCompontents from "./components/echarts/echarts_compontents";
   import textCompontents from "./components/text_compontents";
+  import lineCompontents from "./components/line_compontents";
   import layoutData from "../../api/demo_data"
 
   export default {
@@ -27,17 +33,19 @@
         layoutConfig: {
           cols: 10,
           rows: 10,
-          background: '#bbbbbb',
+          background: 'url(/static/images/background.png)',
         },
         echartsArray: [],
       }
     },
     components: {
       echartsCompontents,
-      textCompontents
+      textCompontents,
+      lineCompontents
     },
     created() {
       this.layout = layoutData
+      registerMap()
     },
     mounted() {
       this.refreshWindowsResize();
@@ -72,16 +80,17 @@
       display: grid;
       width: 100%;
       height: 100%;
+      place-self: center center;
 
       .grid_item {
         text-align: center;
-        background-color: #577da3;
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
         width: 100%;
         height: 100%;
+        padding: 1px;
 
       }
 
