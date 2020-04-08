@@ -5,6 +5,7 @@ import menu from '@/view/menu/menu'
 import layout from '@/view/test/layout'
 import gridLayout from '@/view/test/grid_layout'
 import reportByGridDemo from '@/view/test/report_by_grid_demo'
+import echarts from '@/view/test/echarts'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,10 @@ export const routes = [
         path: '/reportByGridDemo',
         component: reportByGridDemo,
         name: 'reportByGridDemo'
+    }, {
+        path: '/echarts',
+        component: echarts,
+        name: 'echarts'
     }
 ]
 

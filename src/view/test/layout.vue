@@ -41,6 +41,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    color: #2c3e50;
+    background: #666666;
 
     .menu{
       width: 100%;
