@@ -8,6 +8,7 @@ import itemInGrid from '@/view/test/item_in_grid_demo'
 import echarts from '@/view/test/echarts'
 import echartsInGrid from '@/view/test/echarts_in_grid_demo'
 import reportDemo from '@/view/test/report_demo'
+import reportPreview from '../view/report/report_preview'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,10 @@ export const routes = [
         path: '/reportDemo',
         component: reportDemo,
         name: 'reportDemo'
+    }, {
+        path: '/reportPreview',
+        component: reportPreview,
+        name: 'reportPreview'
     }
 ]
 

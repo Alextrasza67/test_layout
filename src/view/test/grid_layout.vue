@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <div class="grid_container">
-      <div v-for="i in 100" class="item" v-bind:key="i">
+      <div v-for="i in 100" class="grid_item" v-bind:key="i">
         <span>{{i}}</span>
       </div>
     </div>
@@ -35,7 +35,7 @@
       grid-template-rows: repeat(10, 10%);
       grid-gap: 1px 1px;
 
-      .item {
+      .grid_item {
         text-align: center;
         background-color: #577da3;
         display: flex;
