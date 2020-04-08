@@ -1,7 +1,6 @@
-
 <template>
     <div class="echarts-container">
-        <div id="echarts_test_div"/>
+        <div :id="`echarts_${echartId}`" class="w100 h100"/>
     </div>
 </template>
 
@@ -10,6 +9,12 @@
         data() {
             return {}
         },
+        props: {
+            echartId:{
+                type: String,
+                require:true
+            }
+        },
         created() {
         },
         mounted() {
@@ -17,10 +22,10 @@
         },
         methods: {
             initECharts() {
-                var myChart = this.$echarts.init(document.getElementById('echarts_test_div'));
+                var myChart = this.$echarts.init(document.getElementById('echarts_'+this.echartId));
                 myChart.setOption({
                     title: {
-                        text: 'ECharts 入门示例'
+                        text: 'ECharts '+this.echartId
                     },
                     tooltip: {},
                     xAxis: {
@@ -33,7 +38,7 @@
                         data: [5, 20, 36, 10, 10, 20]
                     }]
                 });
-                window.onresize = myChart.resize;
+                this.$emit("registeEcharts",myChart)
             }
         }
     }
@@ -48,6 +53,13 @@
 
         #echarts_test_div{
             width: 100%;
+            height: 100%;
+        }
+
+        .w100{
+            width: 100%;
+        }
+        .h100{
             height: 100%;
         }
     }

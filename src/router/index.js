@@ -4,8 +4,9 @@ import VueRouter from 'vue-router'
 import menu from '@/view/menu/menu'
 import layout from '@/view/test/layout'
 import gridLayout from '@/view/test/grid_layout'
-import reportByGridDemo from '@/view/test/report_by_grid_demo'
+import itemInGrid from '@/view/test/item_in_grid_demo'
 import echarts from '@/view/test/echarts'
+import echartsInGrid from '@/view/test/echarts_in_grid_demo'
 
 Vue.use(VueRouter)
 
@@ -23,13 +24,17 @@ export const routes = [
         component: gridLayout,
         name: 'gridLayout'
     }, {
-        path: '/reportByGridDemo',
-        component: reportByGridDemo,
-        name: 'reportByGridDemo'
+        path: '/itemInGrid',
+        component: itemInGrid,
+        name: 'itemInGrid'
     }, {
         path: '/echarts',
         component: echarts,
         name: 'echarts'
+    }, {
+        path: '/echartsInGrid',
+        component: echartsInGrid,
+        name: 'echartsInGrid'
     }
 ]
 

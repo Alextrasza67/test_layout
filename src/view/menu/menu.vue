@@ -16,8 +16,6 @@ export default {
             routes: [],
         }
     },
-    comments:{
-    },
     created() {
         this.bindRouters()
     },

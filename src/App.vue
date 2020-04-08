@@ -7,8 +7,6 @@
 <script>
 export default {
   name: 'app',
-  comments:{
-  }
 }
 </script>
 
@@ -22,5 +20,6 @@ export default {
 html,body {
   overflow: hidden;
   height: 100%;
+  margin: 0px;
 }
 </style>
