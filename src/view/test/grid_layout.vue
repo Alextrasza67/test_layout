@@ -14,13 +14,12 @@
     },
     mounted() {
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style lang="scss" scoped>
-  .screen{
+  .screen {
     top: 0px;
     bottom: 0px;
     left: 0;
@@ -28,7 +27,7 @@
     position: absolute;
     background-color: #bbbbbb;
 
-    .grid_container{
+    .grid_container {
       display: grid;
       width: 100%;
       height: 100%;
@@ -36,14 +35,14 @@
       grid-template-rows: repeat(10, 10%);
       grid-gap: 1px 1px;
 
-      .item{
+      .item {
         text-align: center;
         background-color: #577da3;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        span{
+        span {
           display: block;
           width: 20px;
           height: 20px;

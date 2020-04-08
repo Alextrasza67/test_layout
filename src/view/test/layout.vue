@@ -32,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .app-wrapper{
+  .app-wrapper {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -44,14 +44,15 @@
     color: #2c3e50;
     background: #666666;
 
-    .menu{
+    .menu {
       width: 100%;
       background: #bbbbbb;
       position: relative;
       height: 100px;
       display: flex;
     }
-    .main{
+
+    .main {
       position: relative;
       display: flex;
       -webkit-box-pack: justify;
@@ -59,7 +60,7 @@
       flex: 1 1 0%;
       overflow: hidden;
 
-      .screen-wrapper{
+      .screen-wrapper {
         position: fixed;
         top: 100px;
         left: 0px;
@@ -69,14 +70,15 @@
         background: #000000;
       }
 
-      .tmpl{
+      .tmpl {
         width: 200px;
         background: #666666;
         height: 100%;
         position: relative;
         float: left;
       }
-      .view_windows{
+
+      .view_windows {
         width: calc(100% - 400px);
         background: #333333;
         height: 100%;
@@ -84,7 +86,7 @@
         float: left;
         overflow: auto;
 
-        .sketchpad{
+        .sketchpad {
           position: absolute;
           width: 1920px;
           height: 1080px;
@@ -92,7 +94,7 @@
           min-height: 1080px;
           transform: matrix(1, 0, 0, 1, 0, 0);
 
-          .grid{
+          .grid {
             transform: scale(0.5);
             background-color: #ff44cc;
             position: relative;
@@ -103,7 +105,8 @@
           }
         }
       }
-      .param{
+
+      .param {
         width: 200px;
         position: relative;
         background: #666666;

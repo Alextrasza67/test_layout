@@ -14,7 +14,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .app-wrapper{
+  .app-wrapper {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -24,14 +24,15 @@
     display: flex;
     flex-direction: column;
 
-    .menu{
+    .menu {
       width: 100%;
       background: #bbbbbb;
       position: relative;
       height: 100px;
       display: flex;
     }
-    .main{
+
+    .main {
       position: relative;
       display: flex;
       -webkit-box-pack: justify;
@@ -39,7 +40,7 @@
       flex: 1 1 0%;
       overflow: hidden;
 
-      .screen-wrapper{
+      .screen-wrapper {
         position: fixed;
         top: 100px;
         left: 0px;
@@ -49,21 +50,23 @@
         background: #000000;
       }
 
-      .tmpl{
+      .tmpl {
         width: 15%;
         background: #666666;
         height: 100%;
         position: relative;
         float: left;
       }
-      .view_windows{
+
+      .view_windows {
         width: 70%;
         background: #333333;
         height: 100%;
         position: relative;
         float: left;
       }
-      .param{
+
+      .param {
         width: 15%;
         position: relative;
         background: #666666;

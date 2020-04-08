@@ -7,6 +7,7 @@ import gridLayout from '@/view/test/grid_layout'
 import itemInGrid from '@/view/test/item_in_grid_demo'
 import echarts from '@/view/test/echarts'
 import echartsInGrid from '@/view/test/echarts_in_grid_demo'
+import reportDemo from '@/view/test/report_demo'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,10 @@ export const routes = [
         path: '/echartsInGrid',
         component: echartsInGrid,
         name: 'echartsInGrid'
+    }, {
+        path: '/reportDemo',
+        component: reportDemo,
+        name: 'reportDemo'
     }
 ]
 

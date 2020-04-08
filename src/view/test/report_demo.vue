@@ -10,48 +10,49 @@
     <div class="grid_container">
       <div v-for="(item, i) in layout" :class="`item transparent color-${i%6}`" v-bind:key="i"
            :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
-        <span class="bold">{{i}}</span>
+        <echartsCompontents :echart-id="item.echartId" v-if="item.type == 'echarts'"
+                            v-on:registeEcharts="registeEcharts"></echartsCompontents>
+        <textCompontents :data="item.data" v-if="item.type == 'text'"></textCompontents>
       </div>
     </div>
 
-    <div class="fixed line_container">
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line3"></div>
-    </div>
   </div>
 </template>
 
 <script>
+  import echartsCompontents from "../../components/echarts_compontents";
+  import textCompontents from "../../components/text_compontents";
+
   export default {
     data() {
       return {
         layout: [
-          {cols: 2, rows: 2},
-          {cols: 1, rows: 1},
-          {cols: 7, rows: 2},
-          {cols: 1, rows: 2},
-          {cols: 2, rows: 1},
-          {cols: 1, rows: 2},
-          {cols: 3, rows: 2},
-          {cols: 3, rows: 2},
-          {cols: 3, rows: 1},
-          {cols: 3, rows: 6},
-          {cols: 3, rows: 2},
-          {cols: 2, rows: 1},
-          {cols: 2, rows: 1},
-          {cols: 2, rows: 1},
-          {cols: 2, rows: 1},
-          {cols: 4, rows: 4},
-          {cols: 3, rows: 4},
-        ]
+          {cols: 10, rows: 2, data: 'Title', type: 'text'},
+          {cols: 6, rows: 6, echartId: 'echart1', type: 'echarts'},
+        ],
+        echartsArray: []
       }
+    },
+    components: {
+      echartsCompontents,
+      textCompontents
     },
     created() {
     },
     mounted() {
+      this.refreshWindowsResize();
     },
-    methods: {}
+    methods: {
+      registeEcharts(item) {
+        this.echartsArray.push(item);
+      },
+      refreshWindowsResize() {
+        window.onresize = this.resizeEcharts
+      },
+      resizeEcharts() {
+        this.echartsArray.forEach(item => item.resize())
+      }
+    }
   }
 </script>
 
@@ -82,29 +83,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
 
-        span {
-          display: block;
-          width: 20px;
-          height: 20px;
-        }
       }
 
       .transparent {
         opacity: 0.5;
-      }
-
-      .yellow {
-        background-color: yellow;
-      }
-
-      .red {
-        background-color: red;
-      }
-
-      .bold {
-        color: #000000;
-        opacity: 1;
       }
 
       .color-0 {
