@@ -23,43 +23,25 @@
   },
   {
     "cols": 2,
-    "rows": 8,
-    "type": "echarts",
+    "rows": 3,
+    "type": "rowScroll",
     "config": {
-      "id": "echart1",
-      "options": {
-        "title": {
-          "text": "ECharts测试",
-          "textStyle": {
-            "color": "#fff"
-          },
-          "left":"center"
-        },
-        "tooltip": {},
-        "xAxis": {
-          "data": ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-          "nameTextStyle": {
-            "color": "#fff"
-          },
-          "axisLine": {
-            "lineStyle": {
-              "color": "#fff"
-            }
-          }
-        },
-        "yAxis": {
-          "axisLine": {
-            "lineStyle": {
-              "color": "#fff"
-            }
-          }
-        },
-        "series": [{
-          "name": "销量",
-          "type": "bar",
-          "data": [5, 20, 36, 10, 10, 20]
-        }]
-      }
+      "id": "rowScroll1",
+      "style": "font-size: 20px; color: #fff; text-align: left;",
+      "dataList": [
+        {"data": "01. 测试测试123123","style": "color: #fff"},
+        {"data": "02. 测试测试123123","style": "color: red"},
+        {"data": "03. 测试测试123123","style": "color: #fff"},
+        {"data": "04. 测试测试123123","style": "color: #fff"},
+        {"data": "05. 测试测试123123","style": "color: yellow"},
+        {"data": "06. 测试测试123123","style": "color: yellow"},
+        {"data": "07. 测试测试123123","style": "color: yellow"},
+        {"data": "08. 测试测试123123","style": "color: #fff"},
+        {"data": "09. 测试测试123123","style": "color: #fff"},
+        {"data": "10. 测试测试123123","style": "color: #fff"},
+        {"data": "11. 测试测试123123","style": "color: #fff"},
+        {"data": "12. 测试测试123123","style": "color: red"}
+      ]
     }
   },
   {
@@ -241,6 +223,47 @@
             }
           }
         ]
+      }
+    }
+  },
+  {
+    "cols": 2,
+    "rows": 5,
+    "type": "echarts",
+    "config": {
+      "id": "echart1",
+      "options": {
+        "title": {
+          "text": "ECharts测试",
+          "textStyle": {
+            "color": "#fff"
+          },
+          "left":"center"
+        },
+        "tooltip": {},
+        "xAxis": {
+          "data": ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+          "nameTextStyle": {
+            "color": "#fff"
+          },
+          "axisLine": {
+            "lineStyle": {
+              "color": "#fff"
+            }
+          }
+        },
+        "yAxis": {
+          "axisLine": {
+            "lineStyle": {
+              "color": "#fff"
+            }
+          }
+        },
+        "series": [{
+          "name": "销量",
+          "type": "bar",
+          "data": [5, 20, 36, 10, 10, 20]
+        }]
       }
     }
   },

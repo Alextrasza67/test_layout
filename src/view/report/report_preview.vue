@@ -6,12 +6,13 @@
                 grid-template-rows: repeat(${layoutConfig.rows},${100/layoutConfig.rows}%);`">
       <template v-for="(item, i) in layout">
         <div class="grid_item" v-bind:key="i"
-             v-if="item.type == 'echarts' || item.type == 'text' || item.type == 'colScroll'"
+             v-if="item.type == 'echarts' || item.type == 'text' || item.type == 'colScroll' || item.type == 'rowScroll'"
              :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
           <echartsCompontents :config="item.config" v-if="item.type == 'echarts'"
                               v-on:registeEcharts="registeEcharts"></echartsCompontents>
           <textCompontents :config="item.config" v-if="item.type == 'text'"></textCompontents>
           <colScrollCompontents :config="item.config" v-if="item.type == 'colScroll'"></colScrollCompontents>
+          <rowScrollCompontents :config="item.config" v-if="item.type == 'rowScroll'"></rowScrollCompontents>
         </div>
         <lineCompontents v-bind:key="i" :config="item.config" v-if="item.type == 'line'"></lineCompontents>
       </template>
@@ -26,6 +27,7 @@
   import textCompontents from "./components/text_compontents";
   import lineCompontents from "./components/line_compontents";
   import colScrollCompontents from "./components/col_scroll_compontents";
+  import rowScrollCompontents from "./components/row_scroll_compontents";
   import layoutData from "../../api/demo_data"
 
   export default {
@@ -44,7 +46,8 @@
       echartsCompontents,
       textCompontents,
       lineCompontents,
-      colScrollCompontents
+      colScrollCompontents,
+      rowScrollCompontents
     },
     created() {
       this.layout = layoutData
@@ -67,8 +70,8 @@
       bindRefreshData(){
         var _this = this
         setInterval(function () {
-          _this.layout[5].config.options.series[0].data[0].value = (Math.random() * 100).toFixed(0) - 0;
-          _this.echartsArray[3].setOption(_this.layout[5].config.options, true);
+          _this.layout[6].config.options.series[0].data[0].value = (Math.random() * 100).toFixed(0) - 0;
+          _this.echartsArray[3].setOption(_this.layout[6].config.options, true);
           _this.layout[1].config.newText = (Math.random() * 100).toFixed(0) + _this.layout[1].config.srcText
         },2000);
       }
