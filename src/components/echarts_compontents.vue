@@ -46,7 +46,7 @@
 
 <style lang="scss" scoped>
   .echarts-container {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: #bbbbbb;
