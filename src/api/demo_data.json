@@ -2,7 +2,6 @@
   {
     "cols": 10,
     "rows": 1,
-    "data": "Title",
     "type": "text",
     "config": {
     "data": "测试大屏",
@@ -10,8 +9,21 @@
     }
   },
   {
+    "cols": 10,
+    "rows": 1,
+    "type": "colScroll",
+    "config": {
+      "id": "colScroll1",
+      "text": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
+      "newText": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
+      "srcText": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
+      "style": "font-size: 14px; color: #fff; width: 30%; margin: 0 auto;",
+      "space": 33
+    }
+  },
+  {
     "cols": 2,
-    "rows": 9,
+    "rows": 8,
     "type": "echarts",
     "config": {
       "id": "echart1",
@@ -52,7 +64,7 @@
   },
   {
     "cols": 6,
-    "rows": 9,
+    "rows": 8,
     "type": "echarts",
     "config": {
       "id": "echart2",
@@ -234,7 +246,7 @@
   },
   {
     "cols": 2,
-    "rows": 4,
+    "rows": 3,
     "type": "echarts",
     "config": {
       "id": "echart4",
