@@ -9,6 +9,7 @@ import echarts from '@/view/test/echarts'
 import echartsInGrid from '@/view/test/echarts_in_grid_demo'
 import reportDemo from '@/view/test/report_demo'
 import colScroll from '@/view/test/col_scroll'
+import rowScroll from '@/view/test/row_scroll'
 import reportPreview from '../view/report/report_preview'
 
 Vue.use(VueRouter)
@@ -42,6 +43,10 @@ export const routes = [
         path: '/colScroll',
         component: colScroll,
         name: 'colScroll'
+    }, {
+        path: '/rowScroll',
+        component: rowScroll,
+        name: 'rowScroll'
     }, {
         path: '/reportDemo',
         component: reportDemo,
