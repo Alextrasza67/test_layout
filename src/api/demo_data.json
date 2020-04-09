@@ -265,10 +265,22 @@
             },
             "axisLine": {
               "lineStyle": {
-                "width": 15
+                "width": 8
               }
             },
-            "detail":{"formatter":"{value}%"},
+            "axisTick": {
+              "length": 15
+            },
+            "splitLine": {
+              "length": 20
+            },
+            "pointer": {
+              "width": 5
+            },
+            "detail":{
+              "formatter": "{value}%",
+              "fontSize": 15
+            },
             "data":[{"value":50, "name":"完成率"}]
           }
         ]
