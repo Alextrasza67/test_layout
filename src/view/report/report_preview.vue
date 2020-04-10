@@ -28,7 +28,8 @@
   import lineCompontents from "./components/line_compontents";
   import colScrollCompontents from "./components/col_scroll_compontents";
   import rowScrollCompontents from "./components/row_scroll_compontents";
-  import layoutData from "../../api/demo_data"
+  // import layoutData from "../../api/demo_data"
+  import {getData} from "../../api/reportPreview"
 
   export default {
     data() {
@@ -50,7 +51,7 @@
       rowScrollCompontents
     },
     created() {
-      this.layout = layoutData
+      this.initData()
       registerMap()
       this.bindRefreshData()
     },
@@ -58,6 +59,11 @@
       this.refreshWindowsResize();
     },
     methods: {
+      initData(){
+        getData().then(res => {
+          this.layout = res.data
+        });
+      },
       registeEcharts(item) {
         this.echartsArray.push(item);
       },
