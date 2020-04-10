@@ -1,5 +1,8 @@
+console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
 
-console.log("process.env.NODE_ENV:" + process.env.NODE_ENV);
-
-module.export = {
+module.exports = {
+  publicPath: '/',
+  devServer: {
+    port: 9527
+  }
 }
