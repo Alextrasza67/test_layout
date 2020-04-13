@@ -24,7 +24,9 @@
       initECharts() {
         var myChart = this.$echarts.init(document.getElementById('echarts_' + this.config.id));
         myChart.setOption(this.config.options,true);
-        this.$emit("registeEcharts", myChart)
+        this.$emit("registeWindowResizeEvent", function () {
+          myChart.resize();
+        })
       }
     }
   }
