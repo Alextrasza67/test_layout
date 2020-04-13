@@ -5,7 +5,7 @@
     "type": "text",
     "config": {
     "data": "测试大屏",
-    "style": "font-size: 24px;font-weight: bolder;color: #fff"
+    "style": "font-size: 2vw;font-weight: bolder;color: #fff"
     }
   },
   {
@@ -15,7 +15,7 @@
     "config": {
       "id": "colScroll1",
       "text": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
-      "style": "font-size: 14px; color: #fff; width: 30%; margin: 0 auto;",
+      "style": "font-size: 1.5vw; color: #fff; width: 30%; margin: 0 auto;",
       "space": 33,
       "autoRefresh": true,
       "autoRefreshConfig": {
@@ -30,7 +30,7 @@
     "type": "rowScroll",
     "config": {
       "id": "rowScroll1",
-      "style": "font-size: 20px; color: #fff; text-align: left;",
+      "style": "font-size: 1vw; color: #fff; text-align: left;",
       "dataList": [
         {"data": "01. 测试测试123123","style": "color: #fff"},
         {"data": "02. 测试测试123123","style": "color: red"},
