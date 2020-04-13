@@ -1,12 +1,12 @@
 <template>
-  <div class="screen" :style="`background: ${layoutConfig.background}`">
+  <div class="screen" :style="layoutConfig.style">
 
     <div class="grid_container"
          :style="`grid-template-columns: repeat(${layoutConfig.cols},${100/layoutConfig.cols}%);
                 grid-template-rows: repeat(${layoutConfig.rows},${100/layoutConfig.rows}%);`">
       <template v-for="(item, i) in layout">
         <div class="grid_item" v-bind:key="i"
-             v-if="item.type == 'echarts' || item.type == 'text' || item.type == 'colScroll' || item.type == 'rowScroll'"
+             v-if="item.type != 'line'"
              :style="`grid-column-start: span ${item.cols};grid-row-start: span ${item.rows};`">
           <echartsCompontents :config="item.config" v-if="item.type == 'echarts'"
                               v-on:registeWindowResizeEvent="registeWindowResizeEvent"></echartsCompontents>
@@ -22,13 +22,14 @@
 </template>
 
 <script>
-  import { registerMap } from "../../api/registeEchartsMap"
+  //TODO components import need update to auto registe
   import echartsCompontents from "./components/echarts/echarts_compontents";
   import textCompontents from "./components/text_compontents";
   import lineCompontents from "./components/line_compontents";
   import colScrollCompontents from "./components/col_scroll_compontents";
   import rowScrollCompontents from "./components/row_scroll_compontents";
-  // import layoutData from "../../api/demo_data"
+
+  import {registerMap} from "../../api/registeEchartsMap"
   import {getData} from "../../api/reportPreview"
 
   export default {
@@ -38,7 +39,6 @@
         layoutConfig: {
           cols: 10,
           rows: 10,
-          background: 'url(/static/images/background.png)',
         },
         windowResizeEvent: [],
       }
@@ -51,6 +51,8 @@
       rowScrollCompontents
     },
     created() {
+      this.initConfig()
+      console.log(this.layoutConfig.style)
       this.initData()
       registerMap()
       this.bindRefreshData()
@@ -59,27 +61,32 @@
       this.refreshWindowsResize();
     },
     methods: {
-      initData(){
-        getData().then(res => {
+      initConfig(){
+        getData('/static/js/demo_config.json').then(res => {
+          this.layoutConfig = res.data.layoutConfig
+        });
+      },
+      initData() {
+        getData('/static/js/demo_data.json').then(res => {
           this.layout = res.data
         });
       },
       refreshWindowsResize() {
         window.onresize = this.onWindowResize
       },
-      onWindowResize(){
+      onWindowResize() {
         this.windowResizeEvent.forEach(func => {
           func()
         })
       },
-      registeWindowResizeEvent(event){
-        if((typeof event) == "function"){
+      registeWindowResizeEvent(event) {
+        if ((typeof event) == "function") {
           this.windowResizeEvent.push(event)
-        }else{
+        } else {
           console.error("registe window resize event need a function")
         }
       },
-      bindRefreshData(){
+      bindRefreshData() {
         // var _this = this
         // setInterval(function () {
         //   _this.layout[6].config.options.series[0].data[0].value = (Math.random() * 100).toFixed(0) - 0;

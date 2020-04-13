@@ -1,0 +1,7 @@
+{
+  "layoutConfig": {
+    "cols": 10,
+    "rows": 10,
+    "style": "background: url(/static/images/background.png)"
+  }
+}
