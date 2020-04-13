@@ -15,10 +15,13 @@
     "config": {
       "id": "colScroll1",
       "text": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
-      "newText": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
-      "srcText": "测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息测试滚动消息",
       "style": "font-size: 14px; color: #fff; width: 30%; margin: 0 auto;",
-      "space": 33
+      "space": 33,
+      "autoRefresh": true,
+      "autoRefreshConfig": {
+        "dataUrl": "/data/data/col_refresh.json",
+        "timeout": 30000
+      }
     }
   },
   {
@@ -41,7 +44,12 @@
         {"data": "10. 测试测试123123","style": "color: #fff"},
         {"data": "11. 测试测试123123","style": "color: #fff"},
         {"data": "12. 测试测试123123","style": "color: red"}
-      ]
+      ],
+      "autoRefresh": true,
+      "autoRefreshConfig": {
+        "dataUrl": "/data/data/row_refresh.json",
+        "timeout": 10000
+      }
     }
   },
   {

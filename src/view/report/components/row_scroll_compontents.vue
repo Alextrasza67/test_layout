@@ -9,10 +9,14 @@
 </template>
 
 <script>
+  import {getData} from "../../../api/reportPreview";
+
   export default {
     data() {
       return {
         dataList: [
+        ],
+        newDataList: [
         ],
         animate: false
       }
@@ -25,6 +29,9 @@
     },
     created() {
       this.dataList = this.config.dataList
+      if (this.config.autoRefresh) {
+        this.autoRefresh(this.config.autoRefreshConfig)
+      }
     },
     mounted() {
       setInterval(this.scrollTop, 3000);
@@ -36,10 +43,24 @@
         ul.style = 'transition: all 0.5s;margin-top: -'+height+'px'
         let _this = this
         setTimeout(() => {
-          _this.dataList.push(_this.dataList[0])
-          _this.dataList.shift()
+          if(_this.newDataList.length <= 0){
+            _this.dataList.push(_this.dataList[0])
+            _this.dataList.shift()
+          }else{
+            _this.dataList.push(_this.newDataList[0])
+            _this.newDataList.shift()
+            _this.dataList.shift()
+          }
           ul.style = ''
         }, 500)
+      },
+      autoRefresh(config) {
+        let _this = this
+        setInterval(function () {
+          getData(config.dataUrl).then(res => {
+            _this.newDataList = _this.newDataList.concat(res.data.dataList)
+          })
+        }, config.timeout)
       }
     }
   }

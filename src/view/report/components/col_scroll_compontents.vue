@@ -12,16 +12,18 @@
 </template>
 
 <script>
+  import {getData} from "../../../api/reportPreview"
+
   const defaultConfig = {
     text: '',
     space: 50,
-    newText: '',
+    newText: null,
   }
   export default {
     data() {
       return {
         scrollConfig: null,
-        hasRefresh: false,
+        refreshing: false,
         interval: null,
         // 设置初始位移距离
         distance: 0
@@ -35,15 +37,18 @@
     },
     created() {
       this.scrollConfig = Object.assign(defaultConfig, this.config)
+      if (this.scrollConfig.autoRefresh) {
+        this.autoRefresh(this.scrollConfig.autoRefreshConfig)
+      }
     },
     mounted() {
       this.move();
     },
     watch: {
-      config:{
+      config: {
         deep: true,
-        handler(newValue){
-          if(!this.hasRefresh){
+        handler(newValue) {
+          if (!this.refreshing) {
             this.scrollConfig.newText = newValue.newText
           }
         }
@@ -75,24 +80,44 @@
         this.interval = setInterval(function () {
           // 位移内用记录是是递减,此处的 1 控制移动变量 s
           _this.distance = _this.distance - 1
-          // 判断是否整个内容移动完
+
+          if (_this.refreshing || _this.scrollConfig.newText != null) {
+            // 内容需要刷新
+            if (_this.refreshing && -_this.distance >= (2 * textWidth + _this.scrollConfig.space)) {
+              _this.scrollConfig.text = _this.scrollConfig.newText
+              _this.scrollConfig.newText = null
+              _this.refreshing = false
+              clearInterval(_this.interval)
+              _this.move()
+            } else if (!_this.refreshing && -_this.distance >= textWidth
+                && -_this.distance <= (2 * (textWidth + _this.scrollConfig.space) - viewerWidth) ) {
+              _this.refreshing = true
+              _this.resetTranscript('transcript3-' + _this.config.id, _this.scrollConfig.newText);
+            }
+          }
+
           if (-_this.distance >= (2 * textWidth + _this.scrollConfig.space)) {
             // 若移动完,则重新设定位移值,实现移动完无缝跳转
             _this.distance = _this.scrollConfig.space
-            _this.scrollConfig.text = _this.scrollConfig.newText
-            _this.hasRefresh = false
-            clearInterval(_this.interval)
-            _this.move()
           }
-          if (!_this.hasRefresh && -_this.distance >= textWidth) {
-            _this.hasRefresh = true
-            _this.resetTranscript('transcript3-' + _this.config.id, _this.scrollConfig.newText);
-          }
+
           // 实时设置位移距离
           viewBox.style.transform = 'translateX(' + _this.distance + 'px)'
         }, 27)
       },
-
+      autoRefresh(config) {
+        let _this = this
+        setInterval(function () {
+          if (!_this.refreshing) {
+            getData(config.dataUrl).then(res => {
+              if (res.data.data != null && res.data.data != ''
+                && res.data.data != _this.scrollConfig.text) {
+                _this.scrollConfig.newText = res.data.data
+              }
+            })
+          }
+        }, config.timeout)
+      }
     }
   }
 </script>
