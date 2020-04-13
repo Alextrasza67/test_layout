@@ -26,7 +26,7 @@
   },
   {
     "cols": 2,
-    "rows": 3,
+    "rows": 2,
     "type": "rowScroll",
     "config": {
       "id": "rowScroll1",
@@ -236,7 +236,7 @@
   },
   {
     "cols": 2,
-    "rows": 5,
+    "rows": 3,
     "type": "echarts",
     "config": {
       "id": "echart1",
@@ -280,6 +280,60 @@
     "rows": 3,
     "type": "echarts",
     "config": {
+      "id": "echart5",
+      "options": {
+        "title": {
+          "text": "测试动态数据",
+          "subtext": "纯属虚构",
+          "left": "center",
+          "textStyle": {
+            "color": "#fff"
+          }
+        },
+        "xAxis":{
+          "type":"category",
+          "boundaryGap":false,
+          "axisLine": {
+            "lineStyle": {
+              "color": "#fff"
+            }
+          }
+        },
+        "yAxis":{
+          "boundaryGap":[0,"50%"],
+          "type":"value",
+          "axisLine": {
+            "lineStyle": {
+              "color": "#fff"
+            }
+          }},
+        "series":[
+          {
+            "type":"line",
+            "smooth":true,
+            "symbol":"none",
+            "stack":"a",
+            "areaStyle":{"normal":{}},
+            "name":"成交"
+          }
+        ]
+      },
+      "autoInitData": true,
+      "initDataConfig": {
+        "dataUrl": "/server/dynamicEchartsData"
+      },
+      "autoRefresh": true,
+      "autoRefreshConfig": {
+        "dataUrl": "/server/dynamicEchartsData",
+        "timeout": 500
+      }
+    }
+  },
+  {
+    "cols": 2,
+    "rows": 3,
+    "type": "echarts",
+    "config": {
       "id": "echart4",
       "options": {
         "tooltip":{
@@ -315,6 +369,15 @@
             "data":[{"value":50, "name":"完成率"}]
           }
         ]
+      },
+      "autoInitData": true,
+      "initDataConfig": {
+        "dataUrl": "/server/dynamicPieEchartsData"
+      },
+      "autoRefresh": true,
+      "autoRefreshConfig": {
+        "dataUrl": "/server/dynamicPieEchartsData",
+        "timeout": 1000
       }
     }
   },
