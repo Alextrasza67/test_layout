@@ -1,6 +1,6 @@
 <template>
-  <div class="row-scroll-div" :id="`row-scroll-${config.id}`" :style="config.style">
-    <div class="scroll-container" :id="`scroll-container-${config.id}`">
+  <div class="row-scroll-div" :ref="`row-scroll-${config.id}`" :style="config.style">
+    <div class="scroll-container" :ref="`scroll-container-${config.id}`">
       <ul >
         <li v-for="(item, i) in dataList" v-bind:key="i" :style="item.style">{{item.data}}</li>
       </ul>
@@ -38,7 +38,7 @@
     },
     methods: {
       scrollTop() {
-        let ul = document.getElementById('scroll-container-' + this.config.id).firstChild
+        let ul = this.$refs['scroll-container-' + this.config.id].firstChild
         let height = ul.firstChild.getBoundingClientRect().height
         ul.style = 'transition: all 0.5s;margin-top: -'+height+'px'
         let _this = this

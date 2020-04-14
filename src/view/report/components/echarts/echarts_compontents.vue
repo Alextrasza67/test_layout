@@ -1,6 +1,6 @@
 <template>
   <div class="echarts-container" :style="config.style">
-    <div :id="`echarts_${config.id}`" class="w100 h100"/>
+    <div class="w100 h100" :ref="`echarts_${config.id}`"/>
   </div>
 </template>
 
@@ -29,7 +29,7 @@
     },
     methods: {
       initECharts() {
-        this.myChart = this.$echarts.init(document.getElementById('echarts_' + this.config.id));
+        this.myChart = this.$echarts.init(this.$refs['echarts_' + this.config.id]);
         this.myChart.setOption(this.config.options, true);
         if (this.config.autoInitData) {
           this.initData(this.config.initDataConfig);
