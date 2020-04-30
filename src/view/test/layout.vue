@@ -3,9 +3,9 @@
     <div class="menu"></div>
     <div class="main">
       <div class="tmpl"></div>
-      <div class="view_windows">
+      <div class="view_windows" @mousewheel.ctrl="rollZoom" @mousewheel.meta="rollZoom" >
         <div class="sketchpad">
-          <div class="grid">
+          <div class="grid" :style="`transform: scale(${scale});`">
 
             <div class="drag_item item1" v-drag></div>
             <div class="drag_item item2" v-drag></div>
@@ -20,6 +20,11 @@
 
 <script>
   export default {
+    data() {
+      return {
+        "scale": 0.5
+      }
+    },
     created() {
     },
     mounted() {
@@ -27,29 +32,34 @@
     },
     methods: {
       initScroll() {
-        document.getElementsByClassName("view_windows")[0].scrollTop = 250
-        document.getElementsByClassName("view_windows")[0].scrollLeft = 440
+        var el = document.getElementsByClassName("view_windows")[0]
+        el.scrollLeft = (el.scrollWidth - el.offsetWidth) / 2
+        this.scale = Math.pow(el.offsetWidth / el.scrollWidth, 2)
+        el.scrollTop = (el.scrollHeight - el.offsetHeight) * (1 - this.scale) / 2
+      },
+      rollZoom(event){
+        this.scale = Math.max(Math.min(this.scale + event.wheelDelta/500, 0.95), 0.25)
+        event.preventDefault();
       }
     },
     //注册局部组件指令
     directives: {
-      drag: function(el) {
-        let dragBox = el; //获取当前元素
-        dragBox.onmousedown = e => {
+      drag: function(el, binding, vnode) {
+        let dragItem = el //获取当前元素
+        let _this = vnode.context
+        dragItem.onmousedown = e => {
           //算出鼠标相对元素的位置
-          let disX = e.clientX - dragBox.offsetLeft/2;
-          let disY = e.clientY - dragBox.offsetTop/2;
-          console.log(e.clientX,dragBox.offsetLeft,e.clientY,dragBox.offsetTop)
+          let disX = e.clientX - dragItem.offsetLeft * _this.scale
+          let disY = e.clientY - dragItem.offsetTop * _this.scale
           document.onmousemove = e => {
             //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-            let left = e.clientX - disX;
-            let top = e.clientY - disY;
+            let left = Math.min(Math.max(e.clientX - disX, 0) / _this.scale, 1920 - dragItem.offsetWidth);
+            let top = Math.min(Math.max(e.clientY - disY, 0) / _this.scale, 1080 - dragItem.offsetHeight);
             //移动当前元素
-            dragBox.style.left = left*2 + "px";
-            dragBox.style.top = top*2 + "px";
+            dragItem.style.left = left + "px"
+            dragItem.style.top = top + "px"
           };
-          document.onmouseup = e => {
-            console.log(e.clientX,dragBox.offsetLeft,e.clientY,dragBox.offsetTop)
+          document.onmouseup = () => {
             //鼠标弹起来的时候不再移动
             document.onmousemove = null;
             //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）
@@ -125,7 +135,6 @@
           transform: matrix(1, 0, 0, 1, 0, 0);
 
           .grid {
-            transform: scale(0.5);
             background-color: #ff44cc;
             position: relative;
             top: 0px;
