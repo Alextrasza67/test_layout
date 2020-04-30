@@ -7,6 +7,9 @@
         <div class="sketchpad">
           <div class="grid">
 
+            <div class="drag_item item1" v-drag></div>
+            <div class="drag_item item2" v-drag></div>
+
           </div>
         </div>
       </div>
@@ -26,6 +29,33 @@
       initScroll() {
         document.getElementsByClassName("view_windows")[0].scrollTop = 250
         document.getElementsByClassName("view_windows")[0].scrollLeft = 440
+      }
+    },
+    //注册局部组件指令
+    directives: {
+      drag: function(el) {
+        let dragBox = el; //获取当前元素
+        dragBox.onmousedown = e => {
+          //算出鼠标相对元素的位置
+          let disX = e.clientX - dragBox.offsetLeft/2;
+          let disY = e.clientY - dragBox.offsetTop/2;
+          console.log(e.clientX,dragBox.offsetLeft,e.clientY,dragBox.offsetTop)
+          document.onmousemove = e => {
+            //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+            let left = e.clientX - disX;
+            let top = e.clientY - disY;
+            //移动当前元素
+            dragBox.style.left = left*2 + "px";
+            dragBox.style.top = top*2 + "px";
+          };
+          document.onmouseup = e => {
+            console.log(e.clientX,dragBox.offsetLeft,e.clientY,dragBox.offsetTop)
+            //鼠标弹起来的时候不再移动
+            document.onmousemove = null;
+            //预防鼠标弹起来后还会循环（即预防鼠标放上去的时候还会移动）
+            document.onmouseup = null;
+          };
+        };
       }
     }
   }
@@ -102,6 +132,19 @@
             left: 0px;
             width: 100%;
             height: 100%;
+
+            .drag_item{
+              width: 50px;
+              height: 50px;
+              position: absolute;
+            }
+
+            .item1{
+              background-color: #bbbbbb;
+            }
+            .item2{
+              background-color: #f0c78a;
+            }
           }
         }
       }
