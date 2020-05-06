@@ -82,11 +82,10 @@
           };
         };
         dragItem.ondblclick = () => {
-          let index = vnode.data.key
-          if(index < _this.list.length - 1) {
-            const oldItem = _this.list[index]
-            _this.list.splice(index, 1)
-            _this.list.splice(index+1, 0, oldItem)
+          if(_index < _this.list.length - 1) {
+            const oldItem = _this.list[_index]
+            _this.list.splice(_index, 1)
+            _this.list.splice(_index+1, 0, oldItem)
           }
         }
       }
