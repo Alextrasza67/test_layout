@@ -7,7 +7,8 @@
         <div class="sketchpad">
           <div class="grid" :style="`transform: scale(${scale});`">
             <template v-for="(item,i) in list" >
-              <div class="drag_item" :style="`${item.customStyle}; left: ${item.left}px; top: ${item.top}px; `" v-drag v-bind:key="i"></div>
+              <div class="drag_item" :style="`${item.customStyle}; left: ${item.left}px; top: ${item.top}px; `"
+                   v-drag v-bind:key="i" @keyup.delete="deleteItem"></div>
             </template>
 
           </div>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+  import { bindKeyup } from '../../api/layoutEventBind'
   export default {
     data() {
       return {
@@ -47,11 +49,19 @@
             'top': 0,
             'title': '测试1',
           },
+          {
+            'index':2,
+            'customStyle':'background-color: #ffffff',
+            'left': 0,
+            'top': 0,
+            'title': '测试2',
+          },
         ],
         curItem: {}
       }
     },
     created() {
+      this.bindKeyUpEvent()
     },
     mounted() {
       this.initScroll();
@@ -66,6 +76,16 @@
       rollZoom(event){
         this.scale = Math.max(Math.min(this.scale + event.wheelDelta/500, 0.95), 0.25)
         event.preventDefault();
+      },
+      bindKeyUpEvent(){
+        document.onkeyup = e =>  {
+          bindKeyup(e, this)
+        }
+      },
+      reOrderList(){
+        this.list.forEach((item,index)=>{
+          item.index = index
+        })
       }
     },
     //注册局部组件指令
@@ -103,6 +123,7 @@
             const oldItem = _this.list[_index]
             _this.list.splice(_index, 1)
             _this.list.splice(_index+1, 0, oldItem)
+            _this.reOrderList()
           }
         }
         dragItem.onclick = () => {
