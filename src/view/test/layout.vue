@@ -6,9 +6,9 @@
       <div class="view_windows" @mousewheel.ctrl="rollZoom" @mousewheel.meta="rollZoom" >
         <div class="sketchpad">
           <div class="grid" :style="`transform: scale(${scale});`">
-
-            <div class="drag_item item1" v-drag></div>
-            <div class="drag_item item2" v-drag></div>
+            <template v-for="(item,i) in list" >
+              <div class="drag_item" :style="`${item.customStyle}; left: ${item.left}px; top: ${item.top}px; `" v-drag v-bind:key="i"></div>
+            </template>
 
           </div>
         </div>
@@ -22,7 +22,21 @@
   export default {
     data() {
       return {
-        "scale": 0.5
+        'scale': 0.5,
+        'list':[
+          {
+            'index':0,
+            'customStyle':'background-color: #bbbbbb',
+            'left': 0,
+            'top': 0,
+          },
+          {
+            'index':1,
+            'customStyle':'background-color: #f0c78a',
+            'left': 0,
+            'top': 0,
+          },
+        ]
       }
     },
     created() {
@@ -32,7 +46,7 @@
     },
     methods: {
       initScroll() {
-        var el = document.getElementsByClassName("view_windows")[0]
+        let el = document.getElementsByClassName("view_windows")[0]
         el.scrollLeft = (el.scrollWidth - el.offsetWidth) / 2
         this.scale = Math.pow(el.offsetWidth / el.scrollWidth, 2)
         el.scrollTop = (el.scrollHeight - el.offsetHeight) * (1 - this.scale) / 2
@@ -46,7 +60,8 @@
     directives: {
       drag: function(el, binding, vnode) {
         let dragItem = el //获取当前元素
-        let _this = vnode.context
+        const _this = vnode.context
+        let _index = vnode.data.key
         dragItem.onmousedown = e => {
           //算出鼠标相对元素的位置
           let disX = e.clientX - dragItem.offsetLeft * _this.scale
@@ -56,8 +71,8 @@
             let left = Math.min(Math.max(e.clientX - disX, 0) / _this.scale, 1920 - dragItem.offsetWidth);
             let top = Math.min(Math.max(e.clientY - disY, 0) / _this.scale, 1080 - dragItem.offsetHeight);
             //移动当前元素
-            dragItem.style.left = left + "px"
-            dragItem.style.top = top + "px"
+            _this.list[_index].left = left
+            _this.list[_index].top = top
           };
           document.onmouseup = () => {
             //鼠标弹起来的时候不再移动
@@ -66,6 +81,14 @@
             document.onmouseup = null;
           };
         };
+        dragItem.ondblclick = () => {
+          let index = vnode.data.key
+          if(index < _this.list.length - 1) {
+            const oldItem = _this.list[index]
+            _this.list.splice(index, 1)
+            _this.list.splice(index+1, 0, oldItem)
+          }
+        }
       }
     }
   }
@@ -148,12 +171,6 @@
               position: absolute;
             }
 
-            .item1{
-              background-color: #bbbbbb;
-            }
-            .item2{
-              background-color: #f0c78a;
-            }
           }
         }
       }
