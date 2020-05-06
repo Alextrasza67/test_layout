@@ -13,7 +13,16 @@
           </div>
         </div>
       </div>
-      <div class="param"></div>
+      <div class="param">
+        <p>{{curItem.index}}</p>
+        <p>
+          <el-form :model="curItem" ref="curItem" label-position="right" label-width="50px" >
+            <el-form-item label="title:">
+              <el-input v-model="curItem.title"></el-input>
+            </el-form-item>
+          </el-form>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -22,21 +31,24 @@
   export default {
     data() {
       return {
-        'scale': 0.5,
-        'list':[
+        scale: 0.5,
+        list:[
           {
             'index':0,
             'customStyle':'background-color: #bbbbbb',
             'left': 0,
             'top': 0,
+            'title': '测试0',
           },
           {
             'index':1,
             'customStyle':'background-color: #f0c78a',
             'left': 0,
             'top': 0,
+            'title': '测试1',
           },
-        ]
+        ],
+        curItem: {}
       }
     },
     created() {
@@ -63,11 +75,16 @@
         const _this = vnode.context
         let _index = vnode.data.key
         dragItem.onmousedown = e => {
+          let ctrlOrMetaPress = e.ctrlKey || e.metaKey;
+          if(!ctrlOrMetaPress){
+            return
+          }
+
           //算出鼠标相对元素的位置
           let disX = e.clientX - dragItem.offsetLeft * _this.scale
           let disY = e.clientY - dragItem.offsetTop * _this.scale
           document.onmousemove = e => {
-            //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+            //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置，并限制在绘图区域中
             let left = Math.min(Math.max(e.clientX - disX, 0) / _this.scale, 1920 - dragItem.offsetWidth);
             let top = Math.min(Math.max(e.clientY - disY, 0) / _this.scale, 1080 - dragItem.offsetHeight);
             //移动当前元素
@@ -87,6 +104,9 @@
             _this.list.splice(_index, 1)
             _this.list.splice(_index+1, 0, oldItem)
           }
+        }
+        dragItem.onclick = () => {
+          _this.curItem = _this.list[_index]
         }
       }
     }
