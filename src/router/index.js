@@ -11,6 +11,7 @@ import reportDemo from '@/view/test/report_demo'
 import colScroll from '@/view/test/col_scroll'
 import rowScroll from '@/view/test/row_scroll'
 import reportPreview from '../view/report/report_preview'
+import designTmp from '../view/onlineDesign/design/design_tmp'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,10 @@ export const routes = [
         path: '/reportPreview',
         component: reportPreview,
         name: 'reportPreview'
+    }, {
+        path: '/reportDesign',
+        component: designTmp,
+        name: 'reportDesign'
     }
 ]
 

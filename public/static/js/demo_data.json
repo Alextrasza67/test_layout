@@ -4,8 +4,8 @@
     "rows": 1,
     "type": "text",
     "config": {
-    "data": "测试大屏",
-    "style": "font-size: 2vw;font-weight: bolder;color: #fff"
+      "data": "测试大屏",
+      "style": "font-size: 2vw;font-weight: bolder;color: #fff"
     }
   },
   {
