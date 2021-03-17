@@ -8,10 +8,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@antv/g2": "^4.0.6",
+    "@antv/g6": "^3.4.5",
+    "@antv/l7": "^2.1.15",
+    "@antv/l7-maps": "^2.1.15",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "css-loader": "^3.5.3",
     "echarts": "^4.7.0",
     "element-ui": "^2.4.5",
+    "js-audio-recorder": "^1.0.6",
+    "lamejs": "^1.2.0",
+    "recordrtc": "^5.6.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6"
   },
